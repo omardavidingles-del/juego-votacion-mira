@@ -8,7 +8,7 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mousedown', () => document.body.classList.add('clicking'));
 document.addEventListener('mouseup', () => document.body.classList.remove('clicking'));
 
-// --- 2. SISTEMA DE SONIDO SINTETIZADO ---
+// --- 2. SISTEMA DE SONIDO ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function tocarSonido(tipo) {
@@ -28,7 +28,6 @@ function tocarSonido(tipo) {
     gain.gain.linearRampToValueAtTime(0, now + 0.1);
     osc.start(now); osc.stop(now + 0.1);
   } else if (tipo === 'win') {
-    // Fanfarria
     playTone(523, now, 0.1); playTone(659, now+0.1, 0.1); playTone(784, now+0.2, 0.3); playTone(1046, now+0.3, 0.4);
   } else if (tipo === 'error') {
     osc.type = 'sawtooth';
@@ -38,7 +37,7 @@ function tocarSonido(tipo) {
     gain.gain.linearRampToValueAtTime(0, now + 0.3);
     osc.start(now); osc.stop(now + 0.3);
   } else if (tipo === 'combo') {
-    playTone(880, now, 0.1); // Sonido agudo combo
+    playTone(880, now, 0.1); 
   }
 }
 
@@ -53,7 +52,7 @@ function playTone(freq, time, duration) {
   o.stop(time + duration);
 }
 
-// --- 3. VARIABLES DE ESTADO ---
+// --- 3. VARIABLES ---
 let puntos = 0;
 let tiempo = 60;
 let intervalo;
@@ -62,7 +61,7 @@ let votoCamara = null;
 let combo = 1;
 let record = localStorage.getItem('votaBien_record') || 0;
 
-// Referencias DOM
+// DOM
 const inicioScreen = document.getElementById('pantalla-inicio');
 const juegoScreen = document.getElementById('pantalla-juego');
 const modalRes = document.getElementById('modal-resultado');
@@ -73,7 +72,6 @@ const comboDisplay = document.getElementById('combo-display');
 const tarjeton = document.querySelector('.tarjeton-wrapper');
 const btnShare = document.getElementById('btn-share');
 
-// Inicializar Récord visual
 highScoreTxt.textContent = record;
 
 // --- 4. EVENTOS ---
@@ -87,7 +85,7 @@ document.querySelectorAll('.btn-perfil').forEach(btn => {
 document.querySelectorAll('.casilla').forEach(casilla => {
   casilla.addEventListener('click', function() {
     tocarSonido('click');
-    if (navigator.vibrate) navigator.vibrate(30); // Vibración háptica
+    if (navigator.vibrate) navigator.vibrate(30);
 
     const tipo = this.dataset.tipo;
     const valor = this.dataset.valor;
@@ -98,7 +96,6 @@ document.querySelectorAll('.casilla').forEach(casilla => {
     if (tipo === 'senado') votoSenado = valor;
     if (tipo === 'camara') votoCamara = valor;
 
-    // Lógica de Combos
     if (valor === 'bien') {
       combo++;
       if (combo > 1) {
@@ -120,7 +117,7 @@ document.getElementById('btn-home').addEventListener('click', () => {
   if(confirm("¿Salir?")) volverAlInicio();
 });
 
-// --- 5. FUNCIONES DEL JUEGO ---
+// --- 5. LÓGICA ---
 function iniciarJuego() {
   puntos = 0; tiempo = 60; votoSenado = null; votoCamara = null; combo = 1;
   puntosTxt.textContent = "0";
@@ -169,7 +166,8 @@ function procesarVoto() {
     combo = 1;
     comboDisplay.classList.add('oculto');
     
-    alert("❌ Error. Busca los números 2 y 102.");
+    // CORRECCIÓN EN EL MENSAJE DE ERROR
+    alert("❌ Error. Busca los números 2 (Senado) y 102 (Cámara).");
   }
 }
 
@@ -181,7 +179,6 @@ function finalizarPartida(gano, motivo) {
   
   modalRes.classList.remove('oculto');
 
-  // Guardar Récord
   let nuevoRecord = false;
   if (puntos > record) {
     record = puntos;
@@ -193,6 +190,7 @@ function finalizarPartida(gano, motivo) {
     titulo.textContent = nuevoRecord ? "¡NUEVO RÉCORD!" : "¡VOTO PERFECTO!";
     titulo.style.color = nuevoRecord ? "#ff9800" : "#28a745";
     icono.textContent = nuevoRecord ? "👑" : "🏆";
+    // MENSAJE DE VICTORIA CORREGIDO
     mensaje.innerHTML = `Puntos: <strong>${puntos}</strong><br>Voto correcto: MIRA (2) y MIRA (102).`;
     
     btnShare.style.display = "inline-flex";
@@ -201,6 +199,7 @@ function finalizarPartida(gano, motivo) {
     titulo.textContent = motivo === "tiempo" ? "¡TIEMPO AGOTADO!" : "VOTO NULO";
     titulo.style.color = "#dc3545";
     icono.textContent = "💀";
+    // MENSAJE DE DERROTA CORREGIDO
     mensaje.textContent = "Inténtalo de nuevo. Recuerda: 2 y 102.";
     btnShare.style.display = "none";
   }
@@ -209,6 +208,7 @@ function finalizarPartida(gano, motivo) {
 function configurarShare(score) {
   btnShare.onclick = () => {
     const link = window.location.href;
+    // TEXTO DE COMPARTIR CORREGIDO AQUÍ:
     const text = `🗳️ ¡Reto Vota Bien! \nSaqué ${score} puntos buscando el MIRA 2 y 102. \n¿Puedes ganarme? \n👉 ${link}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
@@ -230,5 +230,3 @@ function lanzarConfeti() {
   fire(0.2, { spread: 60 });
   fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
 }
-
-
