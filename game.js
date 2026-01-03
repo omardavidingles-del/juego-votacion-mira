@@ -230,3 +230,4 @@ function lanzarConfeti() {
   fire(0.2, { spread: 60 });
   fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
 }
+
