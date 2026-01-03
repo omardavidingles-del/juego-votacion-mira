@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vota Bien - El Juego</title>
+  <title>Vota Bien - Edición Interactiva</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,11 +14,11 @@
     <div class="header-inicio">
       <div class="logo-area">🗳️</div>
       <h1>Misión: Vota Bien</h1>
-      <p>Aprende a marcar el tarjetón correctamente sin anular tu voto.</p>
+      <p>Aprende a ubicar tu voto en el tarjetón real.</p>
     </div>
     
     <div class="perfiles-section">
-      <h3>Selecciona tu perfil para comenzar:</h3>
+      <h3>Selecciona tu perfil para empezar:</h3>
       <div class="btn-group">
         <button class="btn-perfil" data-perfil="joven">🎓 Joven</button>
         <button class="btn-perfil" data-perfil="adulto">💼 Adulto</button>
@@ -37,7 +37,7 @@
     </header>
 
     <div class="instruccion-banner">
-      <p>🎯 <strong>Objetivo:</strong> Encuentra y marca <span class="resaltado">MIRA (Logo)</span> y su número.</p>
+      <p>🎯 <strong>Misión:</strong> Encuentra <span class="resaltado">MIRA 2</span> (Senado) y <span class="resaltado">MIRA 12</span> (Cámara).</p>
     </div>
 
     <div class="tarjeton-wrapper">
@@ -95,9 +95,9 @@
             <div class="marca-x">❌</div>
           </div>
 
-          <div class="casilla" data-tipo="camara" data-valor="mal">
-            <div class="logo-partido amarillo">PACTO</div>
-            <div class="numero-partido">105</div>
+          <div class="casilla correcta" data-tipo="camara" data-valor="bien">
+            <div class="logo-partido mira-logo">MIRA</div>
+            <div class="numero-partido">102</div>
             <div class="marca-x">❌</div>
           </div>
 
@@ -107,9 +107,9 @@
             <div class="marca-x">❌</div>
           </div>
 
-          <div class="casilla correcta" data-tipo="camara" data-valor="bien">
-            <div class="logo-partido mira-logo">MIRA</div>
-            <div class="numero-partido">102</div>
+          <div class="casilla" data-tipo="camara" data-valor="mal">
+            <div class="logo-partido amarillo">PACTO</div>
+            <div class="numero-partido">105</div>
             <div class="marca-x">❌</div>
           </div>
 
@@ -148,7 +148,7 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script src="game.js"></script>
 </body>
-
 </html>
