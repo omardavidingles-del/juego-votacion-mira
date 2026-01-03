@@ -1,0 +1,224 @@
+:root {
+  --color-mira: #004aad;
+  --color-fondo: #eef2f5;
+  --color-texto: #333;
+  --color-borde: #444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-fondo);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 900px; /* Un poco más ancho para que quepan las opciones */
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+}
+
+/* --- PANTALLAS --- */
+.pantalla { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.oculto { display: none !important; }
+.activo { display: flex; }
+
+/* --- INICIO --- */
+.header-inicio { text-align: center; margin-bottom: 30px; }
+.logo-area { font-size: 4rem; margin-bottom: 10px; }
+.btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+
+.btn-perfil {
+  background: var(--color-mira);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.btn-perfil:hover { transform: scale(1.05); background: #003380; }
+
+/* --- JUEGO HUD --- */
+.game-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+.hud-info { display: flex; gap: 15px; font-weight: bold; font-size: 1.1rem; }
+.hud-box { background: #f8f9fa; padding: 5px 10px; border-radius: 8px; border: 1px solid #eee; }
+
+.btn-mini {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+.btn-mini:hover { background: #f1f1f1; color: #000; }
+
+.instruccion-banner {
+  background: #e3f2fd;
+  color: #0d47a1;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+/* --- TARJETÓN (GRID RETADOR) --- */
+.tarjeton-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: #fffdf5;
+  border: 3px solid var(--color-borde);
+  padding: 20px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.columna-voto {
+  flex: 1;
+  min-width: 280px;
+  border-right: 2px dashed #ccc;
+  padding: 0 10px;
+}
+.columna-voto:last-child { border-right: none; }
+
+.titulo-zona {
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #333;
+}
+
+.opciones-grid {
+  display: grid;
+  /* Grid responsivo para muchas opciones */
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 12px;
+}
+
+.casilla {
+  border: 1px solid #999;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  min-height: 100px;
+  background: white;
+}
+.casilla:hover { background-color: #f0f8ff; }
+
+/* ESTILOS DE LOGOS */
+.logo-partido {
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.7rem;
+  margin-bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+.numero-partido { font-size: 1.6rem; font-weight: 900; color: #222; }
+.blan-txt { font-size: 0.9rem; }
+
+/* Colores de Partidos (Distractores) */
+.mira-logo { background: var(--color-mira); }
+.rojo { background: #d32f2f; }
+.verde { background: #388e3c; }
+.naranja { background: #f57c00; }
+.morado { background: #7b1fa2; }
+.azul-oscuro { background: #1565c0; }
+.amarillo { background: #fbc02d; color: #333; }
+.gris { background: #bbb; color: #555; }
+
+/* LA MARCA X */
+.marca-x {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 3.5rem;
+  color: #d32f2f;
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+.casilla.seleccionada .marca-x {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.btn-action {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #1e7e34;
+}
+.btn-action:active { transform: translateY(2px); box-shadow: 0 2px 0 #1e7e34; }
+
+/* --- MODAL --- */
+.modal {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 100;
+}
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  animation: popUp 0.3s ease;
+}
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.emoji-res { font-size: 3rem; margin: 10px 0; }
+.modal-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+
+.btn-primary { background: var(--color-mira); color: white; padding: 10px 20px; border:none; border-radius:5px; cursor:pointer;}
+.btn-secondary { background: #6c757d; color: white; padding: 10px 20px; border:none; border-radius:5px; cursor:pointer;}
+
+/* Animación Error */
+.shake { animation: shake 0.5s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@media (max-width: 600px) {
+  .columna-voto { border-right: none; border-bottom: 2px dashed #ccc; padding-bottom: 20px; margin-bottom: 20px; }
+  .opciones-grid { grid-template-columns: repeat(3, 1fr); }
+}

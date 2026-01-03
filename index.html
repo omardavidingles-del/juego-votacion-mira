@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vota Bien - El Juego</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="game-container">
+  
+  <div id="pantalla-inicio" class="pantalla activo">
+    <div class="header-inicio">
+      <div class="logo-area">🗳️</div>
+      <h1>Misión: Vota Bien</h1>
+      <p>Aprende a marcar el tarjetón correctamente sin anular tu voto.</p>
+    </div>
+    
+    <div class="perfiles-section">
+      <h3>Selecciona tu perfil para comenzar:</h3>
+      <div class="btn-group">
+        <button class="btn-perfil" data-perfil="joven">🎓 Joven</button>
+        <button class="btn-perfil" data-perfil="adulto">💼 Adulto</button>
+        <button class="btn-perfil" data-perfil="mayor">👴 Adulto Mayor</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pantalla-juego" class="pantalla oculto">
+    <header class="game-hud">
+      <button id="btn-home" class="btn-mini" title="Salir al menú">🏠 Salir</button>
+      <div class="hud-info">
+        <span class="hud-box">⏳ <span id="tiempo">60</span>s</span>
+        <span class="hud-box">🏆 Puntos: <span id="puntos">0</span></span>
+      </div>
+    </header>
+
+    <div class="instruccion-banner">
+      <p>🎯 <strong>Objetivo:</strong> Encuentra y marca <span class="resaltado">MIRA (Logo)</span> y su número.</p>
+    </div>
+
+    <div class="tarjeton-wrapper">
+      
+      <div class="columna-voto">
+        <div class="titulo-zona">SENADO DE LA REPÚBLICA</div>
+        <div class="opciones-grid">
+          
+          <div class="casilla" data-tipo="senado" data-valor="mal">
+            <div class="logo-partido rojo">LIBERAL</div>
+            <div class="numero-partido">1</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="senado" data-valor="mal">
+            <div class="logo-partido verde">VERDE</div>
+            <div class="numero-partido">10</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla correcta" data-tipo="senado" data-valor="bien">
+            <div class="logo-partido mira-logo">MIRA</div>
+            <div class="numero-partido">2</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="senado" data-valor="mal">
+            <div class="logo-partido naranja">CAMBIO</div>
+            <div class="numero-partido">55</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="senado" data-valor="mal">
+            <div class="logo-partido morado">UNIÓN</div>
+            <div class="numero-partido">8</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="senado" data-valor="mal">
+            <div class="logo-partido gris">VOTO</div>
+            <div class="numero-partido blan-txt">BLANCO</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="columna-voto">
+        <div class="titulo-zona">CÁMARA DE REPRESENTANTES</div>
+        <div class="opciones-grid">
+          
+          <div class="casilla" data-tipo="camara" data-valor="mal">
+            <div class="logo-partido azul-oscuro">CENTRO</div>
+            <div class="numero-partido">101</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="camara" data-valor="mal">
+            <div class="logo-partido amarillo">PACTO</div>
+            <div class="numero-partido">105</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="camara" data-valor="mal">
+            <div class="logo-partido rojo">LIBRE</div>
+            <div class="numero-partido">111</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla correcta" data-tipo="camara" data-valor="bien">
+            <div class="logo-partido mira-logo">MIRA</div>
+            <div class="numero-partido">12</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="camara" data-valor="mal">
+            <div class="logo-partido verde">ESPERANZA</div>
+            <div class="numero-partido">115</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+          <div class="casilla" data-tipo="camara" data-valor="mal">
+            <div class="logo-partido gris">VOTO</div>
+            <div class="numero-partido blan-txt">BLANCO</div>
+            <div class="marca-x">❌</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <button id="btn-votar" class="btn-action">🗳️ DEPOSITAR VOTO</button>
+  </div>
+
+  <div id="modal-resultado" class="modal oculto">
+    <div class="modal-content">
+      <h2 id="titulo-res"></h2>
+      <div id="icono-res" class="emoji-res"></div>
+      <p id="mensaje-res"></p>
+      
+      <div class="modal-buttons">
+        <button id="btn-reiniciar" class="btn-primary">🔁 Jugar de nuevo</button>
+        <button id="btn-salir-modal" class="btn-secondary">🏠 Menú Principal</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
