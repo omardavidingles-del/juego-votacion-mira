@@ -169,7 +169,7 @@ function procesarVoto() {
     combo = 1;
     comboDisplay.classList.add('oculto');
     
-    alert("❌ Error. Busca los números 2 y 12.");
+    alert("❌ Error. Busca los números 2 y 102.");
   }
 }
 
@@ -193,7 +193,7 @@ function finalizarPartida(gano, motivo) {
     titulo.textContent = nuevoRecord ? "¡NUEVO RÉCORD!" : "¡VOTO PERFECTO!";
     titulo.style.color = nuevoRecord ? "#ff9800" : "#28a745";
     icono.textContent = nuevoRecord ? "👑" : "🏆";
-    mensaje.innerHTML = `Puntos: <strong>${puntos}</strong><br>Voto correcto: MIRA (2) y MIRA (12).`;
+    mensaje.innerHTML = `Puntos: <strong>${puntos}</strong><br>Voto correcto: MIRA (2) y MIRA (102).`;
     
     btnShare.style.display = "inline-flex";
     configurarShare(puntos);
@@ -201,7 +201,7 @@ function finalizarPartida(gano, motivo) {
     titulo.textContent = motivo === "tiempo" ? "¡TIEMPO AGOTADO!" : "VOTO NULO";
     titulo.style.color = "#dc3545";
     icono.textContent = "💀";
-    mensaje.textContent = "Inténtalo de nuevo. Recuerda: 2 y 12.";
+    mensaje.textContent = "Inténtalo de nuevo. Recuerda: 2 y 102.";
     btnShare.style.display = "none";
   }
 }
@@ -209,7 +209,7 @@ function finalizarPartida(gano, motivo) {
 function configurarShare(score) {
   btnShare.onclick = () => {
     const link = window.location.href;
-    const text = `🗳️ ¡Reto Vota Bien! \nSaqué ${score} puntos buscando el MIRA 2 y 12. \n¿Puedes ganarme? \n👉 ${link}`;
+    const text = `🗳️ ¡Reto Vota Bien! \nSaqué ${score} puntos buscando el MIRA 2 y 102. \n¿Puedes ganarme? \n👉 ${link}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 }
@@ -230,4 +230,5 @@ function lanzarConfeti() {
   fire(0.2, { spread: 60 });
   fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
 }
+
 
